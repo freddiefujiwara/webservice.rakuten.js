@@ -1,0 +1,24 @@
+{
+  "name": "webservice.rakuten.js",
+  "version": "0.0.0",
+  "description": "Rakuten Webservice I/F (http://webservice.rakuten.co.jp)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/freddiefujiwara/webservice.rakuten.js.git"
+  },
+  "keywords": [
+    "api"
+  ],
+  "author": "Freddie Fujiwara",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "gitHead": "a7a4521bbd54e3f83b3442bc040f96d33425334f",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.6.0"
+  }
+}
