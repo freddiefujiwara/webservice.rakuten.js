@@ -1,0 +1,2 @@
+webservice.rakuten.js
+=====================
