@@ -27,17 +27,38 @@ describe 'Ranking', ->
        r.should.have.property('findByGenreId')
        r.findByGenreId.should.be.a('function')
        #test data
-       sinon.stub($,'ajax').yieldsTo('success',{
-           Body:{
-               ItemRanking:{
-                   Items:{
-                       Item:[
-                       ]
-                   }
-               }
-           },
-           Header: { Status: 'Success', Args: { Arg: {} }, StatusMsg: '' }
-       })
+       sinon.stub($,'ajax').yieldsTo('success',
+           Body:
+               ItemRanking:
+                   Items:
+                       Item:[]
+           Header:
+               Status: 'Success'
+               Args:
+                   Arg:
+                      apiVersion:
+                          content: true
+                          value: "30"
+                      operation:
+                          content: true
+                          value: "ItemRanking"
+                      developerId:
+                          content: true
+                          value: "1084425069581237387"
+                      "User-Agent":
+                          content: true
+                          value: "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.110 Safari/537.36"
+                      affiliateId:
+                          content: true
+                          value: "0ca3304d.a811038d.0ca3304e.80024f1e"
+                      genreId:
+                          content: false
+                          value: "0"
+                      version:
+                          content: true
+                          value: "2010-08-05"
+               StatusMsg: ''
+       )
        r.findByGenreId().done( (data) ->
            should.equal(typeof data , "object")
            should.equal(typeof data.Header , "object")
@@ -54,45 +75,33 @@ describe 'Ranking', ->
     it "has findByGenreId with failure pattern", (done) ->
        #test data
        sinon.stub($,'ajax').yieldsTo('error',
-        {
-          Body: { },
-          Header: {
-            Status: "ClientError",
-            Args: {
-              Arg: {
-                apiVersion: {
-                  content: true,
-                  value: "30"
-                },
-                operation: {
-                  content: true,
-                  value: "ItemRanking"
-                },
-                developerId: {
-                  content: true,
-                  value: "1084425069581237387"
-                },
-                "User-Agent": {
-                  content: true,
-                  value: "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.110 Safari/537.36"
-                },
-                affiliateId: {
-                  content: true,
-                  value: "0ca3304d.a811038d.0ca3304e.80024f1e"
-                },
-                genreId: {
-                  content: false,
-                  value: ""
-                },
-                version: {
-                  content: true,
-                  value: "2010-08-05"
-                }
-              }
-            },
-            StatusMsg: "genreIdパラメータは6桁以下の数値を指定してください。"
-          }
-        }
+          Body: { }
+          Header:
+              Status: "ClientError"
+              Args:
+                  Arg:
+                      apiVersion:
+                          content: true
+                          value: "30"
+                      operation:
+                          content: true
+                          value: "ItemRanking"
+                      developerId:
+                          content: true
+                          value: "1084425069581237387"
+                      "User-Agent":
+                          content: true
+                          value: "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.110 Safari/537.36"
+                      affiliateId:
+                          content: true
+                          value: "0ca3304d.a811038d.0ca3304e.80024f1e"
+                      genreId:
+                          content: false
+                          value: ""
+                      version:
+                          content: true
+                          value: "2010-08-05"
+              StatusMsg: "genreIdパラメータは6桁以下の数値を指定してください。"
        )
        r.findByGenreId().fail( (data) ->
            should.equal(typeof data , "object")
