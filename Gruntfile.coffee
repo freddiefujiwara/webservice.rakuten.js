@@ -1,23 +1,9 @@
 module.exports = (grunt) ->
-  grunt.loadNpmTasks 'grunt-contrib'
   grunt.loadNpmTasks 'grunt-simple-mocha'
+  grunt.loadNpmTasks 'grunt-contrib-uglify'
+  grunt.loadNpmTasks 'grunt-contrib-coffee'
 
   grunt.initConfig
-    watch:
-      coffee:
-        files: "src/**/*.coffee",
-        tasks: ["coffee"]
-
-      coffee_with_test:
-        files: ["src/**/*.coffee", 'test/**/*_test.coffee'],
-        tasks: ["coffee:compile", 'simplemocha']
-
-    coffee:
-      compile:
-        files:
-          'dist/all.js': [
-            "src/**/*.coffee"
-          ]
 
     simplemocha:
       options:
@@ -30,5 +16,29 @@ module.exports = (grunt) ->
       all:
         src: 'test/**/*.coffee'
 
-  grunt.registerTask "run", ["coffee","watch:coffee"]
-  grunt.registerTask "run_with_test", ["coffee", "watch:coffee_with_test"]
+    coffee:
+      compile:
+        options:
+          sourceMap: true
+        files: [
+            expand: true,
+            cwd: 'src',
+            src: '**/*.coffee'
+            dest: 'js/',
+            ext: '.js'
+        ]
+
+    uglify:
+      compress_target:
+        options:
+          sourceMap: (fileName) ->
+            fileName.replace /\.js$/, '.js.map'
+        files: [
+            expand: true,
+            cwd: 'js/',
+            src: ['**/*.js'],
+            dest: 'compress/',
+            ext: '.min.js'
+        ]
+
+  grunt.registerTask "default", ["simplemocha"]

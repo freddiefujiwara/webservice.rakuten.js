@@ -1,4 +1,5 @@
-should =  require('should')
+should = require 'should'
+sinon  = require 'sinon'
 Ranking = require("../src/ranking").Ranking
 
 describe 'Ranking', ->
