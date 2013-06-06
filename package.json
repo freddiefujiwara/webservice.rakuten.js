@@ -13,12 +13,17 @@
   "keywords": [
     "api"
   ],
+  "dependencies": {
+      "jquery":"*"
+  },
   "author": "Freddie Fujiwara",
   "license": "MIT",
   "readmeFilename": "README.md",
   "gitHead": "a7a4521bbd54e3f83b3442bc040f96d33425334f",
   "devDependencies": {
     "grunt": "~0.4.1",
-    "grunt-contrib-jshint": "~0.6.0"
+    "grunt-simple-mocha": "~0.4.0",
+    "grunt-contrib": "~0.7.0",
+    "should": "~1.2.2"
   }
 }
