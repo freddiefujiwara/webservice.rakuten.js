@@ -1,5 +1,5 @@
 root = exports ? window class root.Ranking
-
+$ ?= require 'jquery'
 class root.Ranking
     constructor:(@developer_id ,@affiliate_id = "") ->
         @base_url = "http://api.rakuten.co.jp/rws/3.0/json?operation=ItemRanking&version=2010-08-05&affiliateId=#{@affiliate_id}&developerId=#{@developer_id}"
