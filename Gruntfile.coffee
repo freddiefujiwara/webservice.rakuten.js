@@ -43,7 +43,7 @@ module.exports = (grunt) ->
         ]
 
     watch:
-      files: ['src/**/*.coffee']
+      files: ['src/**/*.coffee','test/**/*.coffee']
       tasks: ['simplemocha','coffee','uglify']
 
   grunt.registerTask "default", ["simplemocha"]

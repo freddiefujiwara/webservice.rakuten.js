@@ -1,17 +1,17 @@
 root = exports ? window class root.Ranking
-$    = require 'jquery'
+$    = $ ? require 'jquery'
 
 class root.Ranking
-    constructor:(@developer_id ,@affiliate_id = "") ->
-        @base_url = "http://api.rakuten.co.jp/rws/3.0/json?operation=ItemRanking&version=2010-08-05&affiliateId=#{@affiliate_id}&developerId=#{@developer_id}"
-        @url     = ""
+    constructor:(@developerId ,@affiliateId = "") ->
+        @baseURL = "http://api.rakuten.co.jp/rws/3.0/json?operation=ItemRanking&version=2010-08-05&affiliateId=#{@affiliateId}&developerId=#{@developerId}"
 
-    find_by_genre_id:(genre_id = 0) ->
-        @url = @base_url + "&genreId=#{genre_id}"
-        d = $.Deferred()
+    findByGenreId:(genreId = 0) ->
+        @url = @baseURL + "&genreId=#{genreId}"
+        deferred = $.Deferred()
         $.ajax @url,
             type: 'GET'
-            success: d.resolve
-            error: d.reject
+            dataType: 'json',
+            success: deferred.resolve
+            error: deferred.reject
 
-        return d.promise()
+        return deferred.promise()
