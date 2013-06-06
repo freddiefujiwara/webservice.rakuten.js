@@ -22,5 +22,7 @@ describe 'Ranking', ->
     it "has find_by_genre_id", ->
        r.should.have.property('find_by_genre_id')
        r.find_by_genre_id.should.be.a('function')
-       r.find_by_genre_id()
+       r.find_by_genre_id().done( (data) ->
+           console.log(data)
+       )
        r.url.should.equal("http://api.rakuten.co.jp/rws/3.0/json?operation=ItemRanking&version=2010-08-05&affiliateId=0ca3304d.a811038d.0ca3304e.80024f1e&developerId=1084425069581237387&genreId=0")
