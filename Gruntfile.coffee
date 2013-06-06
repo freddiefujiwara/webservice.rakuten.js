@@ -2,6 +2,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-simple-mocha'
   grunt.loadNpmTasks 'grunt-contrib-uglify'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
+  grunt.loadNpmTasks 'grunt-contrib-watch'
 
   grunt.initConfig
 
@@ -40,5 +41,9 @@ module.exports = (grunt) ->
             dest: 'compress/',
             ext: '.min.js'
         ]
+
+    watch:
+      files: ['src/**/*.coffee']
+      tasks: ['simplemocha','coffee','uglify']
 
   grunt.registerTask "default", ["simplemocha"]
