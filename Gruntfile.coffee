@@ -1,5 +1,6 @@
 module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-simple-mocha'
+  grunt.loadNpmTasks 'grunt-jscoverage'
   grunt.loadNpmTasks 'grunt-contrib-uglify'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-watch'
@@ -41,7 +42,10 @@ module.exports = (grunt) ->
             dest: 'compress/',
             ext: '.min.js'
         ]
-
+    jscoverage:
+        options:
+            inputDirectory:'js'
+            outputDirectory:'js-cov'
     watch:
       files: ['src/**/*.coffee','test/**/*.coffee']
       tasks: ['simplemocha','coffee','uglify']

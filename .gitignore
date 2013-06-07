@@ -3,3 +3,8 @@ js/*.js
 js/*.js.map
 compress/*.js.map
 compress/*.js
+js-cov/*.css
+js-cov/*.js
+js-cov/*.gif
+js-cov/*.html
+js-cov/*.coffee
