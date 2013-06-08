@@ -1,8 +1,6 @@
 node_modules/
 js/*.js
-js/*.js.map
-compress/*.js.map
-compress/*.js
+dist/*.js
 js-cov/*.css
 js-cov/*.js
 js-cov/*.gif

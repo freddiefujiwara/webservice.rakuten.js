@@ -4,8 +4,10 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-uglify'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-watch'
+  grunt.loadNpmTasks 'grunt-contrib-concat'
 
   grunt.initConfig
+    pkg: grunt.file.readJSON 'package.json'
 
     simplemocha:
       options:
@@ -13,7 +15,7 @@ module.exports = (grunt) ->
         timeout: 3000
         ignoreLeaks: false
         ui: 'bdd'
-        reporter: 'html-cov'
+        reporter: 'tap'
         compilers: 'coffee:coffee-script'
       all:
         src: 'test/**/*.coffee'
@@ -30,15 +32,19 @@ module.exports = (grunt) ->
             ext: '.js'
         ]
 
+    concat:
+      options:
+        separator:';'
+      dist:
+        src:['js/**/*.js']
+        dest:'dist/<%= pkg.name %>.js'
+
     uglify:
-      compress_target:
-        files: [
-            expand: true,
-            cwd: 'js/',
-            src: ['**/*.js'],
-            dest: 'compress/',
-            ext: '.min.js'
-        ]
+      options:
+        banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
+      dist:
+        files:'dist/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
+
     jscoverage:
         options:
             inputDirectory:'js'
@@ -47,4 +53,4 @@ module.exports = (grunt) ->
       files: ['src/**/*.coffee','test/**/*.coffee']
       tasks: ['simplemocha','coffee','uglify']
 
-  grunt.registerTask "default", ["simplemocha"]
+  grunt.registerTask "default", ["simplemocha","coffee","uglify"]
