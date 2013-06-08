@@ -1,7 +1,7 @@
 should = require 'should'
 sinon  = require 'sinon'
 $ = require 'jquery'
-Ranking = require("../src/ranking").Ranking
+Ranking = require("../js-cov/ranking").Ranking
 
 describe 'Ranking', ->
     r = null

@@ -1,4 +1,4 @@
-root = exports ? window class root.Ranking
+root = exports ? window
 $    = $ ? require 'jquery'
 
 class root.Ranking

@@ -13,7 +13,7 @@ module.exports = (grunt) ->
         timeout: 3000
         ignoreLeaks: false
         ui: 'bdd'
-        reporter: 'spec'
+        reporter: 'html-cov'
         compilers: 'coffee:coffee-script'
       all:
         src: 'test/**/*.coffee'
@@ -21,7 +21,7 @@ module.exports = (grunt) ->
     coffee:
       compile:
         options:
-          sourceMap: true
+          join:true
         files: [
             expand: true,
             cwd: 'src',
@@ -32,9 +32,6 @@ module.exports = (grunt) ->
 
     uglify:
       compress_target:
-        options:
-          sourceMap: (fileName) ->
-            fileName.replace /\.js$/, '.js.map'
         files: [
             expand: true,
             cwd: 'js/',

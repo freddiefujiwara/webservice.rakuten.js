@@ -29,6 +29,7 @@
     "grunt-contrib-coffee": "~0.7.0",
     "grunt-contrib-watch": "~0.4.4",
     "grunt-jscoverage": "0.0.2",
-    "grunt-cli": "~0.1.9"
+    "grunt-cli": "~0.1.9",
+    "jscoverage": "~0.3.7"
   }
 }
