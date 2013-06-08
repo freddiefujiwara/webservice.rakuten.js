@@ -1,0 +1,17 @@
+{
+  "strict" : true,
+  "indent" : 2,
+  "maxlen" : 80,
+  "unused" : true,
+  "undef" : true,
+  "browser" : true,
+  "devel" : true,
+  "debug"    : true,
+  "eqnull" : true,
+  "expr" : true,
+  "globals": {
+    "$":false,
+    "exports":false,
+    "require":false
+  }
+}
