@@ -5,6 +5,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-contrib-concat'
+  grunt.loadNpmTasks 'grunt-contrib-jshint'
 
   grunt.initConfig
     pkg: grunt.file.readJSON 'package.json'
@@ -45,6 +46,11 @@ module.exports = (grunt) ->
       dist:
         files:'dist/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
 
+    jshint:
+        files:['js/**/*.js']
+        options:
+          jshintrc:'.jshintrc'
+
     jscoverage:
         options:
             inputDirectory:'js'
@@ -53,4 +59,4 @@ module.exports = (grunt) ->
       files: ['src/**/*.coffee','test/**/*.coffee']
       tasks: ['simplemocha','coffee','uglify']
 
-  grunt.registerTask "default", ["simplemocha","coffee","uglify"]
+  grunt.registerTask "default", ["simplemocha","coffee","jshint","concat","uglify"]
