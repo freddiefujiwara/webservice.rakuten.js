@@ -1,10 +1,11 @@
 "use strict"
 root = exports ? window
+$ = $ ? require 'jquery'
 
 class root.Ranking
     constructor:(@developerId ,@affiliateId = "") ->
         @baseURL = "http://api.rakuten.co.jp/rws/3.0/json"
-        @baseURL+= "operation=ItemRanking&version=2010-08-05"
+        @baseURL+= "?operation=ItemRanking&version=2010-08-05"
         @baseURL+= "&affiliateId=#{@affiliateId}"
         @baseURL+= "&developerId=#{@developerId}"
             
