@@ -1,6 +1,5 @@
 "use strict"
 root = exports ? window
-$    = $ ? require 'jquery'
 
 class root.Ranking
     constructor:(@developerId ,@affiliateId = "") ->

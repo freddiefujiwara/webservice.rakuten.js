@@ -12,7 +12,7 @@ module.exports = (grunt) ->
 
     simplemocha:
       options:
-        globals: ['should']
+        globals: ['should','$']
         timeout: 3000
         ignoreLeaks: false
         ui: 'bdd'
