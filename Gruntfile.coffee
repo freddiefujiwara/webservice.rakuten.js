@@ -22,20 +22,19 @@ module.exports = (grunt) ->
       all:
         src: 'test/**/*.coffee'
 
-    checkcoverage:
+    makecoverage:
       options:
         globals: ['should','$']
         timeout: 3000
         ignoreLeaks: false
         ui: 'bdd'
-        reporter: 'json-cov'
         compilers: 'coffee:coffee-script'
-      all:
+      json:
         src: 'test/**/*.coffee'
 
     exec:
       makecoveragejson:
-        command: './node_modules/.bin/grunt --no-color checkcoverage | grep -v checkcoverage:all | grep -v "Done, without errors" > <%= pkg.name %>.coverage.json 2>&1'
+        command: './node_modules/.bin/grunt --no-color makecoverage | grep -v makecoverage:json | grep -v "Done, without errors" > <%= pkg.name %>.coverage.json 2>&1'
         stdout: false
         stderror: false
 
@@ -77,12 +76,28 @@ module.exports = (grunt) ->
       files: ['src/**/*.coffee','test/**/*.coffee']
       tasks: ['simplemocha','coffee','uglify']
 
-  grunt.registerTask "default", ["simplemocha","coffee","jshint","concat","uglify"]
+    checkcoverage:
+      options:
+        min:80
+      all:{}
 
-  grunt.registerMultiTask 'checkcoverage', 'Run tests with mocha and take coverages', () ->
+
+  grunt.registerTask "default", ["simplemocha","coffee","jshint","jscoverage","exec:makecoveragejson","checkcoverage","concat","uglify"]
+
+  grunt.registerMultiTask 'makecoverage', 'Run tests with mocha and take coverages', () ->
     Mocha = require 'mocha'
-    mocha_instance = new Mocha @options()
+    options = @options()
+    options.reporter = "#{@nameArgs.replace(/^makecoverage:/,'')}-cov"
+    mocha_instance = new Mocha options
     @filesSrc.forEach(mocha_instance.addFile.bind(mocha_instance))
     done = @async()
     mocha_instance.run (errCount) ->
       done 0 == errCount
+
+  grunt.registerMultiTask 'checkcoverage', 'Run tests with mocha and take coverages', () ->
+    fs = require 'fs'
+    options = @options()
+    for file in JSON.parse(fs.readFileSync('./webservice.rakuten.js.coverage.json', "utf8")).files
+        if options.min > file.coverage
+            console.log "#{file.filename} doesn't reach coverage #{file.coverage}% < #{options.min}%"
+            done false

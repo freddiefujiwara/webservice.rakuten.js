@@ -7,3 +7,4 @@ js-cov/*.gif
 js-cov/*.html
 js-cov/*.coffee
 *.coverage.json
+*.coverage.html
