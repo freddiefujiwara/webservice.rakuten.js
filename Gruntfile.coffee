@@ -17,7 +17,7 @@ module.exports = (grunt) ->
         timeout: 3000
         ignoreLeaks: false
         ui: 'bdd'
-        reporter: 'tap'
+        reporter: 'spec'
         compilers: 'coffee:coffee-script'
       all:
         src: 'test/**/*.coffee'
@@ -35,6 +35,10 @@ module.exports = (grunt) ->
     exec:
       makecoveragejson:
         command: './node_modules/.bin/grunt --no-color makecoverage | grep -v makecoverage:json | grep -v "Done, without errors" > <%= pkg.name %>.coverage.json 2>&1'
+        stdout: false
+        stderror: false
+      syntax2js:
+        command: "for i in syntax/*.pegjs ; do ./node_modules/.bin/pegjs $i `echo $i | sed 's/pegjs/js/g' | sed 's/syntax/js/g'` ; done"
         stdout: false
         stderror: false
 
@@ -101,3 +105,4 @@ module.exports = (grunt) ->
         if options.min > file.coverage
             console.log "#{file.filename} doesn't reach coverage #{file.coverage}% < #{options.min}%"
             done false
+
