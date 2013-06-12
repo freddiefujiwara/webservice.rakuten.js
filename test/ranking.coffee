@@ -1,8 +1,8 @@
 should = require 'should'
 sinon  = require 'sinon'
 $ = require 'jquery'
-Ranking = require("../js-cov/ranking").Ranking
-#Ranking = require("../src/ranking").Ranking
+#Ranking = require("../js-cov/ranking").Ranking
+Ranking = require("../src/ranking").Ranking
 
 describe 'Ranking', ->
     r = null
@@ -104,12 +104,14 @@ describe 'Ranking', ->
                           value: "2010-08-05"
               StatusMsg: "genreIdパラメータは6桁以下の数値を指定してください。"
        )
-       r.findByGenreId().fail( (data) ->
+       r.findByGenreId().done( (data) ->
            should.equal(typeof data , "object")
            should.equal(typeof data.Header , "object")
            should.equal(typeof data.Body , "object")
-           should.equal(typeof data.Body.ItemRanking , "undefined")
-           should.equal(data.Header.Status , "ClientError")
+           should.equal(typeof data.Body.ItemRanking , "object")
+           should.equal(typeof data.Body.ItemRanking.Items , "object")
+           should.equal(typeof data.Body.ItemRanking.Items.Item , "object")
+           should.equal(data.Header.Status , "Success")
            done()
        )
        r.url.should.equal("http://api.rakuten.co.jp/rws/3.0/json?operation=ItemRanking&version=2010-08-05&affiliateId=0ca3304d.a811038d.0ca3304e.80024f1e&developerId=1084425069581237387&genreId=0")

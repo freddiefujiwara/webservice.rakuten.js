@@ -17,3 +17,6 @@ primary
 
 integer "integer"
   = digits:[0-9]+ { return parseInt(digits.join(""), 10); }
+
+identifire 
+  = character
