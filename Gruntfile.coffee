@@ -86,8 +86,7 @@ module.exports = (grunt) ->
       all:{}
 
 
-  grunt.registerTask "default", ["coffee","jscoverage","simplemocha","exec:makecoveragejson","checkcoverage","concat","uglify"]
-
+  grunt.registerTask "default", ["coffee","jscoverage","exec:syntax2js","simplemocha","exec:makecoveragejson","checkcoverage","concat","uglify"] 
   grunt.registerMultiTask 'makecoverage', 'Run tests with mocha and take coverages', () ->
     Mocha = require 'mocha'
     options = @options()
