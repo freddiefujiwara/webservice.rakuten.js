@@ -14,7 +14,8 @@
     "api"
   ],
   "dependencies": {
-    "jquery": "~1.8.3"
+    "jquery": "~1.8.3",
+    "pegjs": "~0.7.0"
   },
   "author": "Freddie Fujiwara",
   "license": "MIT",
@@ -35,5 +36,8 @@
     "sinon": "~1.7.2",
     "mocha": "~1.10.0",
     "jscoverage": "~0.3.7"
+  },
+  "engine": {
+    "node": ">= 0.8.0"
   }
 }
